@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# VERBOSE=true
+
+CUSTOM_MSFCONSOLE=${HOME}/git/metasploit-framework
+[[ -d ${CUSTOM_MSFCONSOLE} ]] || CUSTOM_MSFCONSOLE=${HOME}/Downloads/metasploit-framework
+
+SCRIPT_FILE=$(pwd)/msf_script.rc
+
+FTPINSTALLDIR=/usr/local/proftpd-1.3.0
+
+# PROCESS=$(pgrep -f 'proftpd.*ftptest')
+PROCESS=$(pgrep -f 'proftpd.*accepting')
+[[ -z "${PROCESS}" ]] && PROCESS=$(pgrep -f 'proftpd.*SYST')
+
+FTPHOME=/home/ftptest
+
+say() {
+	echo -e "\e[1;34m$1\e[0m"
+}
+
+fail() {
+	echo -e "\e[1;31m$1\e[0m"
+	exit
+}
+
+# Dump config if run directly like 'bash config'
+if [[ "config" == $0 ]]; then
+	say "CUSTOM_MSFCONSOLE=${CUSTOM_MSFCONSOLE}"
+	say "SCRIPT_FILE=${SCRIPT_FILE}"
+	say "FTPINSTALLDIR=${FTPINSTALLDIR}"
+	say "FTPHOME=${FTPHOME}"
+	say "PROCESS=${PROCESS}"
+fi

